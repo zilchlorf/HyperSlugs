@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="skeleton.css">
+
+    <title>TŪNADO!</title>
+</head>
+
+<body id="body">
+    <div class="header">
+        <h1 class="tunado">TŪNADO!</h1>
+    </div>
+    <header>
+
+    </header>
+
+    <form>
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="six columns">
+                        <label for="playlistGenreInput">Generate playlist based on:</label>
+                        <select class="u-full-width" id="playlistGenreInput">
+                            <option value="Option 1">Weather</option>
+                            <option value="Option 2">Mood</option>
+                            <option value="Option 3">Random</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="userInput">
+                <label for="Acousticness">Acousticness</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" id="Acousticness" />
+                <br>
+                <label for="Danceability">Danceability</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" id="Danceability" />
+                <br>
+                <label for="Energy">Energy</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider" id="Energy" />
+                <br>
+                <label for="Instrumentalness">Instrumentalness</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider"
+                    id="Instrumentalness" />
+                <br>
+                <label for="Liveness">Liveness</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider" id="Liveness" />
+                <br>
+                <label for="Loudness">Loudness</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider" id="Loudness" />
+                <br>
+                <label for="Popularity">Popularity</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider" id="Popularity" />
+                <br>
+                <label for="Speechiness">Speechiness</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider" id="Speechiness" />
+                <br>
+                <label for="Tempo">Tempo</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider" id="Tempo" />
+                <br>
+                <label for="Positivity">Positivity</label>
+                <input class="u-full-width" type="range" min="0" max="100" value="50" class="slider" id="Positivity" />
+                <input class="button u-full-width" type="submit" value="Apply" />
+    </form>
+    </div>
+
+</body>
+
+</html>
