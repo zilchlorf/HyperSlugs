@@ -2,6 +2,7 @@ let clientID = "9f547ffe813f412baf1c09310914078f";
 // const redirectURI = "https://www.spotify.com/us/account/apps/";
 const redirectURI = "https://weerklank.github.io/HyperSlugs/auth.html";
 var spotifyUrl = ("https://accounts.spotify.com/authorize?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&response_type=token&scope=user-library-read%20user-read-playback-state%20streaming%20user-modify-playback-state%20playlist-modify-public%20playlist-modify-private%20user-read-currently-playing%20playlist-read-private%20user-follow-read")
+console.log(spotifyUrl)
 
 $(document).ready(function () {
 
@@ -57,12 +58,11 @@ $(document).ready(function () {
 		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
 		let bearer = "Bearer" + bearerURLThree
-		console.log(bearer)
-		}
-	})
+})
 
 	$(".apply").on("click", function (e) {
 		e.preventDefault()
+		bearer = "bearer BQCrB2veeqHWmYRVVFxGdvPBTnmExG13ZDM_f18ZSp7Nu2TKPyvOYEvWuwlU09wTvFIU2nqPaiTw8WYpEsGetvhtqGEDoXtFYpbrHC9iE2HYt7Ho5SPuuvnWe6kBvIZjbtIlpZnu9fNpUGucI90yi90fvmq6l0772uNzbuR6vxwyUO4xseKfufwzBvsQCVp8uJ--V9i_G-om9GP-KdR6AzqbIwQaINu26qhrJRsTYGIaGvlaVk94vII"
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
 		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
