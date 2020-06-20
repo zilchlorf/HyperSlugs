@@ -39,7 +39,6 @@ $(document).ready(function () {
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
 		let bearer = "Bearer" + bearerURLThree
 		window.close()
-		alert(bearer)
 	})
 
 
@@ -58,6 +57,7 @@ $(document).ready(function () {
 })
 
 	$(".apply").on("click", function (e) {
+		console.log(bearer)
 		e.preventDefault()
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
