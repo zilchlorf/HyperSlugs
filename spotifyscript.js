@@ -52,7 +52,6 @@ $(document).ready(function () {
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
 		window.open(spotifyUrl)
-		theBearerURL(theBearerURLThree)
 	})
 
 	$(".apply").on("click", function (e) {
