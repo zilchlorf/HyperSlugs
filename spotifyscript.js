@@ -1,20 +1,8 @@
 let clientID = "9f547ffe813f412baf1c09310914078f";
 const redirectURI = "https://www.spotify.com/us/account/apps/";
-var spotifyUrl = ("https://accounts.spotify.com/authorize?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&response_type=token&scope=user-library-read%20user-library-modify%20user-read-playback-state%20streaming%20user-modify-playback-state%20playlist-modify-public%20user-read-currently-playing%20playlist-read-private%20user-follow-read")
+var spotifyUrl = ("https://accounts.spotify.com/authorize?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&response_type=token&scope=user-library-read%20user-read-playback-state%20streaming%20user-modify-playback-state%20playlist-modify-public%20playlist-modify-private%20user-read-currently-playing%20playlist-read-private%20user-follow-read")
 
 console.log(spotifyUrl)
-
-// 		maxAcousticness: "1",
-// 		minAcousticness: "0",
-// 		maxDanceability: "1",
-// 		minDanceability: "0",
-// 		maxEnergy: "1",
-// 		minEnergy: "0",
-// 		maxInstrumentalness: "1",
-// 		minInstrumentalness: "0",
-// 		maxValence: "1",
-// 		minValence: "0",
-// 		limit: "50",
 
 $(document).ready(function () {
 
@@ -23,6 +11,9 @@ $(document).ready(function () {
 	let savedSongArray = []
 	let idArray = []
 	let songsFit = []
+	let songsFitURIs = []
+	let idStringArray = []
+	let songsFitIds = []
 	let danceMax = 1
 	let danceMin = 0
 	let accMax = 1
@@ -33,33 +24,57 @@ $(document).ready(function () {
 	let instMin = 0 //instrumental
 	let valMax = 1
 	let valMin = 0
-	var bearerToken = "Bearer BQAKBiqBt7pVV_zCBDkkq5pAOH-TEBhRLAxaG1d0qZTR6BVO6yoBxxt0hD24MJy0RyUYPEvaXN8kt9GvS1jiwudSxuiVr1JE_gLn3ghFWGh4WToggRsR6qJjNrYwGIsJurCGRYpj6WsrPagUzyxCtiH4M5JuYAPRVPbbH4LKYFH7ko3A0FmcDAS0GwYACBfJaiRSgXq3KqnXF9HaK5OGDMpPLg"
+	let timing = 0
+	let inputName = "New Playlist"
+	let bearerToken = "Bearer BQD1MFjFbw6NZjeV8VS6RXmxGE4v9-6MJm7QRBkgcx-ALO1Z28mPGm8iOwIJ8X8_Es1A4NIn9NinGVZh3gW8q58hQHYURgRRc2frI4YGHkxpqBD5qsa7ANif61OE3Wd-UKQSFXGkKfCCEby18Ucgbn0qLegkw65I0gtWuzDyW4IGOJRwFtgxXvSj38ImhniGNoFokM2tR-Zp4k5oS4faKVcsOegBuHpxk-pXhxwPmsSFDUkOKl0pqPg"
+	let playlistId = "0MqG1tjVIxh2p8KGWOqiqF"
 
-	$(".button").on("click", function(e) {
+	// $('.').on('click', function (e) {
+	// 	window.open(spotifyUrl)
+	// })
+
+	$(".apply").on("click", function (e) {
 		e.preventDefault()
-		console.log('click', document.getElementById('playlistGenreInput').value)
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
-			console.log('oh shit moooood')
-		}
-		else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
-			console.log('fuck da weather')
+		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
+			if (weatherResult !== null) {
+				console.log(weatherResult.weather.description)
+				weatherGeneratorCall(weatherResult)
+				console.log("In the spotify thingy " + attrArray)
+				// danceMax = attrArray[0]
+				// danceMin = attrArray[1]
+				// accMax = attrArray[2]
+				// accMin = attrArray[3]
+				// enMax = attrArray[4]
+				// enMin = attrArray[5]
+				// instMax = attrArray[6]
+				// instMin = attrArray[7]
+				// valMax = attrArray[8]
+				// valMin = attrArray[9]
+			} else {
+				confirm('Please enter an accurate zip code or city name and try again')
+				return
+			}
 		}
 		// getLikedSongs(limit, offset)
-	})
-	getID()
+	});
 
-	$('.saveControl').on("click", function() {
-		getID()
-	})
+	$(".savePlaylist").on("click", function (e) {
+		if ($('.saveControl')[0].value !== "") {
+			inputName = $('.saveControl')[0].value
+		} else {
+			return
+		}
+	});
 
-	function minMax () {
+	function minMax() {
 		let dance = parseInt(document.getElementById("Danceability").value)
 		let acc = parseInt(document.getElementById("Acousticness").value)
 		let en = parseInt(document.getElementById("Energy").value)
 		let inst = parseInt(document.getElementById("Instrumentalness").value)
 		let val = parseInt(document.getElementById("Positivity").value)
-		if (dance === 0){
+		if (dance === 0) {
 			danceMax = .4
 			danceMin = 0
 		}
@@ -79,8 +94,7 @@ $(document).ready(function () {
 			danceMax = 1
 			danceMin = .6
 		}
-		console.log(danceMax, danceMin, dance)
-		if (acc = 0){
+		if (acc = 0) {
 			accMax = .4
 			accMin = 0
 		}
@@ -100,7 +114,7 @@ $(document).ready(function () {
 			accMax = 1
 			accMin = .6
 		}
-		if (en === 0){
+		if (en === 0) {
 			enMax = .4
 			enMin = 0
 		}
@@ -120,7 +134,7 @@ $(document).ready(function () {
 			enMax = 1
 			enMin = .6
 		}
-		if (inst === 0){
+		if (inst === 0) {
 			instMax = .4
 			instMin = 0
 		}
@@ -140,7 +154,7 @@ $(document).ready(function () {
 			instMax = 1
 			instMin = .6
 		}
-		if (val === 0){
+		if (val === 0) {
 			valMax = .4
 			valMin = 0
 		}
@@ -160,7 +174,8 @@ $(document).ready(function () {
 			valMax = 1
 			valMin = .6
 		}
-	}
+		getLikedSongs(limit, offset)
+	};
 
 	function getLikedSongs(limit, offset) {
 
@@ -199,14 +214,25 @@ $(document).ready(function () {
 		for (let i = 0; i < length; i++) {
 			for (let j = 0; j < 100; j++) {
 				idArray[j] = array[j + (i * 100)].track.id
-				// Don't forget
-				// Make it so extra songs past the last full 100 get counted too
 			}
-			idString = idArray.join()
+			idStringArray[i] = idArray.join()
+			// songAJAX(idString, length)
+		}
+		idArray = []
+		for (let c = 0; c < lessThanOneHundred; c++) {
+			idArray.push(array[c + (length * 100)].track.id)
+		}
+		idStringArray[length] = idArray.join()
+		songAJAX(idStringArray, length)
+		// $.when(songAJAX(idString, length)).then(ifNeedExtra(songsFit))
+	};
+
+	function songAJAX(idStringArray, length) {
+		for (var i = 0; i < idStringArray.length; i++) {
 			settings = {
 				"async": true,
 				"crossDomain": true,
-				"url": "https://api.spotify.com/v1/audio-features?ids=" + idString,
+				"url": "https://api.spotify.com/v1/audio-features?ids=" + idStringArray[i],
 				"method": "GET",
 				"headers": {
 					"content-type": "application/x-www-form-urlencoded",
@@ -216,7 +242,6 @@ $(document).ready(function () {
 
 			$.ajax(settings).done(function (response) {
 				for (let c = 0; c < response.audio_features.length; c++) {
-					console.log(danceMax,danceMin)
 					if (response.audio_features[c].danceability < danceMax &&
 						response.audio_features[c].danceability > danceMin &&
 						response.audio_features[c].acousticness < accMax &&
@@ -228,14 +253,82 @@ $(document).ready(function () {
 						response.audio_features[c].valence < valMax &&
 						response.audio_features[c].valence > valMin) {
 						songsFit.push(response.audio_features[c])
-						console.log(songsFit)
+					}
+				}
+				timing++
+				if (timing == length) {
+					if (songsFit.length < 20) {
+						let amount = (20 - songsFit.length)
+						getExtraSongs(amount, songsFit)
+						songsFitURI(songsFit)
+					} else {
+						songsFitURI(songsFit)
 					}
 				}
 			})
 		}
+	}
+
+	function getExtraSongs(amount, songsFit) {
+		settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": "https://api.spotify.com/v1/recommendations?market=US",
+			"method": "GET",
+			"timeout": 0,
+			"headers": {
+				"Content-Type": "application/json",
+				"Accept": "application/json",
+				"Authorization": bearerToken
+			},
+			data: {
+				// seed_tracks: songsFit[0].id,
+				seed_tracks: '7egj375ez0KtF3bYCfAHdZ',
+				max_acousticness: accMax,
+				min_acousticness: accMin,
+				max_danceability: danceMax,
+				min_danceability: danceMin,
+				max_energy: enMax,
+				min_energy: enMin,
+				max_instrumentalness: instMax,
+				min_instrumentalness: instMin,
+				max_valence: valMax,
+				min_valence: valMin,
+				limit: amount
+			}
+		};
+
+		$.ajax(settings).done(function (response) {
+			console.log(response, "list")
+			for (let c = 0; c < response.tracks.length; c++) {
+				songsFit.push(response.tracks[c])
+			}
+			songsFitURI(songsFit)
+		}).fail(function (response) {
+			console.log(response)
+		})
 	};
 
-	function getID() {
+	function songsFitURI(songsFit) {
+		for (var c = 0; c < songsFit.length; c++) {
+			songsFitURIs[c] = songsFit[c].uri
+		}
+		let songsFitURIsArray = []
+		let songsFitURIBit = []
+		let incrtwo = Math.ceil(songsFitURIs.length / 50)
+		if (songsFitURIs.length > 50) {
+			let incriment = 0
+			for (c = 0; c < incrtwo; c++) {
+				songsFitURIBit.push(songsFitURIs.slice(incriment,incriment+50))
+				incriment = incriment + 50
+				songsFitURIsArray.push(encodeURIComponent(songsFitURIBit[c]))
+			}
+		}
+		console.log(songsFitURIs.length, songsFitURIBit, songsFitURIsArray, 'fakubaku')
+		getID(songsFitURIsArray)
+	};
+
+	function getID(songsFitURIsArray) {
 		var settings = {
 			"async": true,
 			"crossDomain": true,
@@ -249,31 +342,64 @@ $(document).ready(function () {
 
 		$.ajax(settings).done(function (response) {
 			let userId = response.id
-			console.log(response)
+			makeNewPlaylist(userId, songsFitURIsArray)
 			console.log(userId)
-			// makeNewPlaylist(userId)
 		})
-	}
+	};
 
-	function makeNewPlaylist(userId) {
-		inputName = "Test 1"
+	getID()
+	function makeNewPlaylist(userId, songsFitURIsArray) {
+
+		inputNameTwo = encodeURIComponent(inputName)
+
 		var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": "https://api.spotify.com/v1/users/" + userId + "/playlists",
+			type: "POST",
+			url: 'https://api.spotify.com/v1/users/' + userId + '/playlists',
 			"method": "POST",
+			"timeout": 0,
 			"headers": {
-				"content-type": "application/JSON",
+				"Content-Type": "application/json",
+				"Accept": "application/json",
 				"Authorization": bearerToken
 			},
-			"data": {
-				"name": inputName,
-				"public": false
-			}
+			data: JSON.stringify({
+				name: inputNameTwo,
+				public: 'false'
+			}),
+			json: true
 		}
 
+
 		$.ajax(settings).done(function (response) {
-			console.log(response)
+			var playlistId = response.id
+			console.log(response.id)
+			addToPlaylist(playlistId, songsFitURIsArray)
+		}).fail(function (response) {
+			console.log('darn', response, settings)
 		})
-	}
+	};
+
+	function addToPlaylist(playlistId, songsFitURIsArray) {
+
+		for (var c = 0; c < songsFitURIsArray.length; c++) {
+
+			var settings = {
+				"url": "https://api.spotify.com/v1/playlists/"+playlistId+"/tracks?uris="+songsFitURIsArray[c],
+				"method": "POST",
+				"timeout": 0,
+				"headers": {
+					"Content-Type": "application/json",
+					"Accept": "application/json",
+					"Authorization": bearerToken
+				},
+			};
+
+			$.ajax(settings).done(function (response) {
+				console.log('added to playlist')
+			}).fail(function (response) {
+				console.log('fuck', response)
+			})
+		}
+	};
+
 });
