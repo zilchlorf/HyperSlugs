@@ -33,14 +33,11 @@ $(document).ready(function () {
 		let bearerURL = window.location.href
 		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=','')
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600','')
-	
-		function theBearerURL(){
-			let bearerURLPrime=bearerURLThree
-			return bearerURLPrime
-		}
-		
+		let bearer = "Bearer" + bearerURLThree
+		console.log(bearer)
 		window.close()
 	}
+
 
 	function load(){
 		let boxy = localStorage.getItem('playlist')
@@ -55,9 +52,7 @@ $(document).ready(function () {
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
 		window.open(spotifyUrl)
-		theBearerURL()
-		let bearer = "Bearer" + bearerURLPrime
-		console.log(bearer)
+		theBearerURL(theBearerURLThree)
 	})
 
 	$(".apply").on("click", function (e) {
