@@ -4,32 +4,32 @@ var hello = null
 var attrArray = []
 
 function getSearchMethod(searchTerm) {
-    if(searchTerm.length === 5 && Number.parseInt(searchTerm) + '' === searchTerm)
-        return 'postal_code';
-    else
-        return 'city';
+	if (searchTerm.length === 5 && Number.parseInt(searchTerm) + '' === searchTerm)
+		return 'postal_code';
+	else
+		return 'city';
 }
 
 function searchWeather(searchTerm) {
-    const searchMethod = getSearchMethod(searchTerm)
-    const url = `https://api.weatherbit.io/v2.0/current?${searchMethod}=${searchTerm}&key=${appId}&units=${units}`
+	const searchMethod = getSearchMethod(searchTerm)
+	const url = `https://api.weatherbit.io/v2.0/current?${searchMethod}=${searchTerm}&key=${appId}&units=${units}`
 
     fetch(url).then(result => result.json())
     .then(result => {
         console.log('result from api is: ', result);
         init(result);
 		console.log(hello)
-		// weatherGeneratorCall(result);
-		// console.log('test')
     })
 }
+
 function init(resultFromServer) {
-	hello = resultFromServer
-	return hello
+	weatherResult = resultFromServer.data[0]
+	return weatherResult
 }
 
 function weatherGeneratorCall(resultFromServer) {
-	switch (resultFromServer.data[0].weather.description) {
+	console.log(resultFromServer)
+	switch (resultFromServer.weather.description) {
 		case 'Clear sky':
 		case 'Smoke':
 		case 'Sand/Dust':
@@ -136,7 +136,7 @@ function weatherGeneratorCall(resultFromServer) {
 }
 
 document.getElementById('searchBtn').addEventListener('click', () => {
-    let searchTerm = document.getElementById('searchInput').value;
-    if(searchTerm)
-        searchWeather(searchTerm);
+	let searchTerm = document.getElementById('searchInput').value;
+	if (searchTerm)
+		searchWeather(searchTerm);
 })
