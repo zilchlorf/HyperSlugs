@@ -29,6 +29,8 @@ $(document).ready(function () {
 	let weatherResult = null
 
 	load()
+	lala()
+	console.log(tea)
 
 	function load(){
 		let boxy = localStorage.getItem('playlist')
@@ -43,7 +45,7 @@ $(document).ready(function () {
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
 		window.open(spotifyUrl)
-		console.log(document.getElementById("url"))
+		theBearerURL()
 		let bearer = "Bearer" + bearerURLPrime
 		console.log(bearer)
 	})
