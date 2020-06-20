@@ -25,7 +25,8 @@ $(document).ready(function () {
 	let valMin = 0
 	let timing = 0
 	let inputName = "New Playlist"
-	let bearerToken = "Bearer BQA1bggyaTzIpg5o_6LocOj4kfuMyBwZc4kHQvN_3F4m_aMP2WgAAL3d6vazvl0gUeNaXXbERBmpT-ImSSBjPeWZzsX-bPQ11tJZ6TQKF5zgCoahc5One33rnEkeDGnL6zhSLN4cb5694BtM7518iKZ3UhO_xoxNYaaCQCDt9pwKx2iU0Wrs7v64f-OZ3ZmxqMEkrEOg895cBD_LkWVO6ALDSDd7ddrVzx6Xn109Z6zJBtTLR9jz1I0"
+	let bearerToken = ""
+	let bearer = "Bearer" + bearerToken
 	let weatherResult = null
 
 	load()
@@ -198,7 +199,7 @@ $(document).ready(function () {
 			"method": "GET",
 			"headers": {
 				"content-type": "application/x-www-form-urlencoded",
-				"Authorization": bearerToken
+				"Authorization": bearer
 			}
 		}
 
@@ -248,7 +249,7 @@ $(document).ready(function () {
 				"method": "GET",
 				"headers": {
 					"content-type": "application/x-www-form-urlencoded",
-					"Authorization": bearerToken
+					"Authorization": bearer
 				}
 			}
 
@@ -291,7 +292,7 @@ $(document).ready(function () {
 			"headers": {
 				"Content-Type": "application/json",
 				"Accept": "application/json",
-				"Authorization": bearerToken
+				"Authorization": bearer
 			},
 			data: {
 				// seed_tracks: songsFit[0].id,
@@ -346,7 +347,7 @@ $(document).ready(function () {
 			"method": "GET",
 			"headers": {
 				"content-type": "application/x-www-form-urlencoded",
-				"Authorization": bearerToken
+				"Authorization": bearer
 			},
 		}
 
@@ -368,7 +369,7 @@ $(document).ready(function () {
 			"headers": {
 				"Content-Type": "application/json",
 				"Accept": "application/json",
-				"Authorization": bearerToken
+				"Authorization": bearer
 			},
 			data: JSON.stringify({
 				name: inputNameTwo,
@@ -400,7 +401,7 @@ $(document).ready(function () {
 				"headers": {
 					"Content-Type": "application/json",
 					"Accept": "application/json",
-					"Authorization": bearerToken
+					"Authorization": bearer
 				},
 			};
 
