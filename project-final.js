@@ -100,6 +100,7 @@ function weatherGeneratorCall(resultFromServer) {
 }
 
 document.getElementById('searchBtn').addEventListener('click', () => {
+	searchBtn.setAttribute("style", "background:lightgreen; color:black; ")
     let searchTerm = document.getElementById('searchInput').value;
     if(searchTerm)
         searchWeather(searchTerm);

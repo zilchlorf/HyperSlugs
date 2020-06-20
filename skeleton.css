@@ -48,6 +48,10 @@
   height: 60px;
 }
 
+.button:hover {
+  background-color:lightgreen;
+  color:black;
+}
 
 /* Search Box ___________________________________________________________ */
 #searchContainer {
