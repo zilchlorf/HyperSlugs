@@ -1,5 +1,6 @@
 let clientID = "9f547ffe813f412baf1c09310914078f";
-const redirectURI = "https://www.spotify.com/us/account/apps/";
+// const redirectURI = "https://www.spotify.com/us/account/apps/";
+const redirectURI = "https://weerklank.github.io/HyperSlugs/auth.html";
 var spotifyUrl = ("https://accounts.spotify.com/authorize?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&response_type=token&scope=user-library-read%20user-read-playback-state%20streaming%20user-modify-playback-state%20playlist-modify-public%20playlist-modify-private%20user-read-currently-playing%20playlist-read-private%20user-follow-read")
 
 console.log(spotifyUrl)
@@ -44,6 +45,7 @@ $(document).ready(function () {
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
 		window.open(spotifyUrl)
+		console.log(document.getElementById("url"))
 	})
 
 	$(".apply").on("click", function (e) {
