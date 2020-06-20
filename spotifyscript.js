@@ -26,8 +26,6 @@ $(document).ready(function () {
 	let valMin = 0
 	let timing = 0
 	let inputName = "New Playlist"
-	let bearerToken = ""
-	let bearer = "Bearer" + bearerToken
 	let weatherResult = null
 
 	load()
@@ -46,6 +44,8 @@ $(document).ready(function () {
 		e.preventDefault()
 		window.open(spotifyUrl)
 		console.log(document.getElementById("url"))
+		let bearer = "Bearer" + bearerURLPrime
+		console.log(bearer)
 	})
 
 	$(".apply").on("click", function (e) {

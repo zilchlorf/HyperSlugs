@@ -11,13 +11,6 @@
 
 /* CSS we've added ________________________________________________________________ */
 
-.authenticate{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-}
-
 #body {
  background: url(https://i.imgur.com/AqAI2V5.jpg);
  padding-left: 0px;
