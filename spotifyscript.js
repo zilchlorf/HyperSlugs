@@ -28,23 +28,22 @@ $(document).ready(function () {
 
 	load()
 
-	if (window.location.href.startsWith("https://weerklank.github.io/HyperSlugs/auth.html#access_token=")){
+	if (window.location.href.startsWith("https://weerklank.github.io/HyperSlugs/auth.html#access_token=")) {
 		console.log(window.location.href)
 		let bearerURL = window.location.href
-		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=','')
-		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600','')
+		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
+		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
 		let bearer = "Bearer" + bearerURLThree
 		console.log(bearer)
 		window.close()
 	}
 
 
-	function load(){
+	function load() {
 		let boxy = localStorage.getItem('playlist')
 		if (boxy == null) {
 			return
-		}
-		else {
+		} else {
 			$(".iframe").attr("src", boxy)
 		}
 	}
@@ -52,6 +51,16 @@ $(document).ready(function () {
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
 		window.open(spotifyUrl)
+
+		if (window.location.href.startsWith("https://weerklank.github.io/HyperSlugs/auth.html#access_token=")) {
+			console.log(window.location.href)
+			let bearerURL = window.location.href
+			let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
+			let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
+			let bearer = "Bearer" + bearerURLThree
+			console.log(bearer)
+			window.close()
+		}
 	})
 
 	$(".apply").on("click", function (e) {
@@ -339,7 +348,7 @@ $(document).ready(function () {
 		if (songsFitURIs.length > 50) {
 			let incriment = 0
 			for (c = 0; c < incrtwo; c++) {
-				songsFitURIBit.push(songsFitURIs.slice(incriment,incriment+50))
+				songsFitURIBit.push(songsFitURIs.slice(incriment, incriment + 50))
 				incriment = incriment + 50
 				songsFitURIsArray.push(encodeURIComponent(songsFitURIBit[c]))
 			}
@@ -403,7 +412,7 @@ $(document).ready(function () {
 			localStorage.setItem('playlist', box)
 
 			var settings = {
-				"url": "https://api.spotify.com/v1/playlists/"+playlistId+"/tracks?uris="+songsFitURIsArray[c],
+				"url": "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks?uris=" + songsFitURIsArray[c],
 				"method": "POST",
 				"timeout": 0,
 				"headers": {
