@@ -42,6 +42,7 @@ $(document).ready(function () {
 
 		window.close()
 	})
+	console.log(bearer)
 
 
 	function load() {
