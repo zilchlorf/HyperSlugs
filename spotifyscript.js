@@ -13,7 +13,6 @@ $(document).ready(function () {
 	let songsFit = []
 	let songsFitURIs = []
 	let idStringArray = []
-	let songsFitIds = []
 	let danceMax = 1
 	let danceMin = 0
 	let accMax = 1
@@ -26,12 +25,25 @@ $(document).ready(function () {
 	let valMin = 0
 	let timing = 0
 	let inputName = "New Playlist"
-	let bearerToken = "Bearer BQD1MFjFbw6NZjeV8VS6RXmxGE4v9-6MJm7QRBkgcx-ALO1Z28mPGm8iOwIJ8X8_Es1A4NIn9NinGVZh3gW8q58hQHYURgRRc2frI4YGHkxpqBD5qsa7ANif61OE3Wd-UKQSFXGkKfCCEby18Ucgbn0qLegkw65I0gtWuzDyW4IGOJRwFtgxXvSj38ImhniGNoFokM2tR-Zp4k5oS4faKVcsOegBuHpxk-pXhxwPmsSFDUkOKl0pqPg"
-	let playlistId = "0MqG1tjVIxh2p8KGWOqiqF"
+	let bearerToken = "Bearer BQA1bggyaTzIpg5o_6LocOj4kfuMyBwZc4kHQvN_3F4m_aMP2WgAAL3d6vazvl0gUeNaXXbERBmpT-ImSSBjPeWZzsX-bPQ11tJZ6TQKF5zgCoahc5One33rnEkeDGnL6zhSLN4cb5694BtM7518iKZ3UhO_xoxNYaaCQCDt9pwKx2iU0Wrs7v64f-OZ3ZmxqMEkrEOg895cBD_LkWVO6ALDSDd7ddrVzx6Xn109Z6zJBtTLR9jz1I0"
+	let weatherResult = null
 
-	// $('.').on('click', function (e) {
-	// 	window.open(spotifyUrl)
-	// })
+	load()
+
+	function load(){
+		let boxy = localStorage.getItem('playlist')
+		if (boxy == null) {
+			return
+		}
+		else {
+			$(".iframe").attr("src", boxy)
+		}
+	}
+
+	$('.auth').on('click', function (e) {
+		e.preventDefault()
+		window.open(spotifyUrl)
+	})
 
 	$(".apply").on("click", function (e) {
 		e.preventDefault()
@@ -39,19 +51,18 @@ $(document).ready(function () {
 			minMax()
 		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
 			if (weatherResult !== null) {
-				console.log(weatherResult.weather.description)
 				weatherGeneratorCall(weatherResult)
-				console.log("In the spotify thingy " + attrArray)
-				// danceMax = attrArray[0]
-				// danceMin = attrArray[1]
-				// accMax = attrArray[2]
-				// accMin = attrArray[3]
-				// enMax = attrArray[4]
-				// enMin = attrArray[5]
-				// instMax = attrArray[6]
-				// instMin = attrArray[7]
-				// valMax = attrArray[8]
-				// valMin = attrArray[9]
+				danceMax = attrArray[0]
+				danceMin = attrArray[1]
+				accMax = attrArray[2]
+				accMin = attrArray[3]
+				enMax = attrArray[4]
+				enMin = attrArray[5]
+				instMax = attrArray[6]
+				instMin = attrArray[7]
+				valMax = attrArray[8]
+				valMin = attrArray[9]
+				getLikedSongs(limit, offset)
 			} else {
 				confirm('Please enter an accurate zip code or city name and try again')
 				return
@@ -60,9 +71,10 @@ $(document).ready(function () {
 		// getLikedSongs(limit, offset)
 	});
 
-	$(".savePlaylist").on("click", function (e) {
-		if ($('.saveControl')[0].value !== "") {
-			inputName = $('.saveControl')[0].value
+	$(".saveName").on("click", function (e) {
+		e.preventDefault()
+		if ($('.saveControl')[1].value != "") {
+			inputName = $('.saveControl')[1].value
 		} else {
 			return
 		}
@@ -299,13 +311,12 @@ $(document).ready(function () {
 		};
 
 		$.ajax(settings).done(function (response) {
-			console.log(response, "list")
 			for (let c = 0; c < response.tracks.length; c++) {
 				songsFit.push(response.tracks[c])
 			}
 			songsFitURI(songsFit)
 		}).fail(function (response) {
-			console.log(response)
+			console.log('something seems to have gone wrong', response, settings)
 		})
 	};
 
@@ -324,7 +335,6 @@ $(document).ready(function () {
 				songsFitURIsArray.push(encodeURIComponent(songsFitURIBit[c]))
 			}
 		}
-		console.log(songsFitURIs.length, songsFitURIBit, songsFitURIsArray, 'fakubaku')
 		getID(songsFitURIsArray)
 	};
 
@@ -343,11 +353,9 @@ $(document).ready(function () {
 		$.ajax(settings).done(function (response) {
 			let userId = response.id
 			makeNewPlaylist(userId, songsFitURIsArray)
-			console.log(userId)
 		})
 	};
 
-	getID()
 	function makeNewPlaylist(userId, songsFitURIsArray) {
 
 		inputNameTwo = encodeURIComponent(inputName)
@@ -372,16 +380,18 @@ $(document).ready(function () {
 
 		$.ajax(settings).done(function (response) {
 			var playlistId = response.id
-			console.log(response.id)
 			addToPlaylist(playlistId, songsFitURIsArray)
 		}).fail(function (response) {
-			console.log('darn', response, settings)
+			console.log('something seems to have gone wrong', response, settings)
 		})
 	};
 
 	function addToPlaylist(playlistId, songsFitURIsArray) {
 
 		for (var c = 0; c < songsFitURIsArray.length; c++) {
+
+			var box = ('https://open.spotify.com/embed/playlist/' + playlistId)
+			localStorage.setItem('playlist', box)
 
 			var settings = {
 				"url": "https://api.spotify.com/v1/playlists/"+playlistId+"/tracks?uris="+songsFitURIsArray[c],
@@ -395,9 +405,11 @@ $(document).ready(function () {
 			};
 
 			$.ajax(settings).done(function (response) {
-				console.log('added to playlist')
+				$(".iframe").attr("src", box)
+				console.log($('.iframe'))
 			}).fail(function (response) {
-				console.log('fuck', response)
+				$(".iframe").attr("src", box)
+				console.log('something seems to have gone wrong', response, settings)
 			})
 		}
 	};

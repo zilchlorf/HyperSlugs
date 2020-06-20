@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="skeleton.css">
-    <title>Document</title>
+    <title>TŪNADO!</title>
 </head>
 
 <!-- Logo in top part of header below -------------------------------------------->
@@ -29,15 +29,19 @@
                 <div class="row">
 
                     <div align=center class="one.columns" id="searchContainer">
+                        <input class="saveControl" type="text" placeholder="Login">
+                        <input class="button auth" type="submit" value="Authorize">
+                    </div>
+
+                    <div align=center class="one.columns" id="searchContainer">
                         <input class="searchControl" type="text" placeholder="City Name or Zipcode" id="searchInput">
                         <button class="button" id="searchBtn">Find Weather</button>
                     </div>
+
                 </div>
             </section>
         </div>
     </header>
-
-    <!-- User input box below -------------------------------------------------------->
 
     <!-- Generate Playlist controls for user input box -->
     <div class="container">
@@ -48,9 +52,8 @@
                         <br>
                         <label for="playlistGenreInput">Generate Playlist By</label>
                         <select padding-top=5px class="button u-full-width" id="playlistGenreInput">
-                            <option value="Option 1">Weather</option>
                             <option value="Option 2">Mood</option>
-                            <option value="Option 3">Random</option>
+                            <option value="Option 1">Weather</option>
                         </select>
                         <br>
                         <!-- User input sliders below ------------------------>
@@ -108,6 +111,9 @@
                             <option>75</option>
                             <option>100</option>
                         </datalist>
+                        <!-- Name Playlist and Save --------------------------->
+                        <input class="saveControl" type="text" placeholder="Name Playlist">
+                        <input class="button u-full-width saveName" type="submit" value="Save Name">
                         <!-- Apply user input settings below------------------->
                         <input class="button u-full-width apply" type="submit" value="Apply" />
                 </form>
@@ -115,26 +121,16 @@
 
             <!-- Playlist slider box below -------------------------------------------------->
             <div class="two-third columns listBox">
-                <!------------------------------ place holder text ------------------------>
-                
 
-                <!-- Playlist slider box below -------------------------------------------------->
-                <div class="two-third columns listBox">
-                    <!------------------------------ place holder text ------------------------>
-                    <!-- <iframe src="https://open.spotify.com/embed/playlist/3A7Ph2WTz9eNPlMPvpa5bW" boarder="5px"
-                        width="100%" height="390" frameborder="0" allowtransparency="true"
-                        allow="encrypted-media"></iframe> -->
-                </div>
+                <iframe src="https://open.spotify.com/embed/playlist/0O0YxMKsPZrXJGyKWtEruT" align="center" width="100%"
+                    height="485px" frameborder="5px" allowtransparency="true" allow="encrypted-media" class="iframe"></iframe>
+            </div>
         </section>
         <br>
-        <!-- Save Playlist button below ------------------------------------------------->
 
-        <div align="center" class="one.columns" style=padding-right:5px class="six.columns">
-            <div align=center style=padding-right:5px class="one.columns">
-                <input class="saveControl" type="text" placeholder="Name Playlist">
-                <input type="submit" value="Save" class="savePlaylist">
-            </div>
-        </div>
+
+
+
 
     </div>
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
