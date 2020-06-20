@@ -35,6 +35,7 @@ $(document).ready(function () {
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
 		let bearer = "Bearer" + bearerURLThree
 		console.log(bearer)
+
 		window.close()
 	}
 
@@ -51,15 +52,12 @@ $(document).ready(function () {
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
 		window.open(spotifyUrl)
-
-		if (window.location.href.startsWith("https://weerklank.github.io/HyperSlugs/auth.html#access_token=")) {
-			console.log(window.location.href)
-			let bearerURL = window.location.href
-			let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
-			let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
-			let bearer = "Bearer" + bearerURLThree
-			console.log(bearer)
-			window.close()
+		console.log(window.location.href)
+		let bearerURL = window.location.href
+		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
+		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
+		let bearer = "Bearer" + bearerURLThree
+		console.log(bearer)
 		}
 	})
 
