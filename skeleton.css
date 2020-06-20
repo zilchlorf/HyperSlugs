@@ -201,7 +201,7 @@
   /* Box styles */
   .listBox {
     max-height: 410px;
-    max-width: 600px;
+    max-width: 950px;
     
     align: right;
     overflow: auto;

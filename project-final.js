@@ -1,28 +1,6 @@
-// var settings = {
-// 	"async": true,
-// 	"crossDomain": true,
-// 	"url": "https://api.weatherbit.io/v2.0/current?city=PORTLANDOR&key=b8cce7d514214016b192b5bfa4958cbf",
-// 	"method": "GET",
-// 	}
-
-// $.ajax(settings).done(function (response) {
-// 	console.log(response);
-// });
-
-// var userInput
-// var temp
-
-//pull input based on location 
-//build IDs to grab to know where to put the response//
-//grab HTML elements//
-// $('.class').text(response.temp)
-
-// if (temp , 50) {
-//     addtoplaylist genre 
-// }
-
 const appId = 'b8cce7d514214016b192b5bfa4958cbf';
 let units = 'imperial';
+var hello = null
 
 function getSearchMethod(searchTerm) {
     if(searchTerm.length === 5 && Number.parseInt(searchTerm) + '' === searchTerm)
@@ -39,10 +17,15 @@ function searchWeather(searchTerm) {
     .then(result => {
         console.log('result from api is: ', result);
         init(result);
+        console.log(hello)
     })
 }
-
 function init(resultFromServer) {
+	hello = resultFromServer
+	return hello
+}
+
+function weatherGeneratorCall(resultFromServer) {
     switch (resultFromServer.weather.decription) {
     	case 'Clear':
 		case 'Smoke':
@@ -115,36 +98,9 @@ function init(resultFromServer) {
         	break;
  	}
 }
-//     let weatherDescriptionHeader = document.getElementById('weatherDescriptionHeader');
-//     let temperatureElement = document.getElementById('temperature');
-//     let humidityElement = document.getElementById('humidity');
-//     let windSpeedElement = document.getElementById('windSpeed');
-//     let cityHeader = document.getElementById('cityHeader');
-
-//     let resultDescription = resultFromServer.weather[0].description;
-//     weatherDescriptionHeader.innerText = resultDescription.charAt(0).toUpperCase() + resultDescription.slice(1);
-
-//     temperatureElement.innerHTML = Math.floor(resultFromServer.main.temp) + '&#176';
-//     windSpeedElement.innerHTML = 'Winds at ' + Math.floor(resultFromServer.wind.speed) + 'm/s';
-//     cityHeader.innerHTML = resultFromServer.name;
-//     humidityElement.innerHTML = 'Humidity levels at ' + resultFromServer.main.humidity + '%';
-
-//     setPositionForWeatherInfo();
-// }
-
-// function setPositionForWeatherInfo() {
-//     let weatherContainer = document.getElementById('weatherContainer');
-//     let weatherContainerHeight = weatherContainer.clientHeight;
-//     let weatherContainerWidth = weatherContainer.clientWidth;
-
-//     weatherContainer.style.left = `calc(50% - ${weatherContainerWidth/2}px)`;
-//     weatherContainer.style.top = `calc(50% - ${weatherContainerHeight/1.3}px)`;
-//     weatherContainer.style.visibility = 'visible';
-// }
 
 document.getElementById('searchBtn').addEventListener('click', () => {
     let searchTerm = document.getElementById('searchInput').value;
     if(searchTerm)
         searchWeather(searchTerm);
 })
-
