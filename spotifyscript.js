@@ -25,6 +25,7 @@ $(document).ready(function () {
 	let timing = 0
 	let inputName = "New Playlist"
 	let weatherResult = null
+	let bearer = null
 
 	load()
 
@@ -57,7 +58,7 @@ $(document).ready(function () {
 	$(".apply").on("click", function (e) {
 		e.preventDefault()
 		if (window.localStorage.getItem('array') != null){
-			let bearer = window.localStorage.getItem('array')
+			bearer = window.localStorage.getItem('array')
 			window.localStorage.removeItem('array')
 			console.log(bearer)
 		}
