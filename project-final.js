@@ -35,7 +35,7 @@ function weatherGeneratorCall(resultFromServer) {
 		case 'Clear sky':
 		case 'Smoke':
 		case 'Sand/Dust':
-		case 'Unkown Precipitation':
+		case 'Unknown precipitation':
 		case 'Few clouds':
 			attrArray[0] = 1
 			attrArray[1] = .3
@@ -64,17 +64,17 @@ function weatherGeneratorCall(resultFromServer) {
 			attrArray[9] = .3
 			console.log("In the function "+ attrArray)
 			break;
-		case 'Light Rain':
-		case 'Moderate Rain':
-		case 'Heavy Rain':
+		case 'Light rain':
+		case 'Moderate rain':
+		case 'Heavy rain':
 		case 'Drizzle':
-		case 'Heavy Drizzle':
+		case 'Heavy drizzle':
 		case 'Light shower rain':
 		case 'Shower rain':
 		case 'Heavy shower rain':
 		case 'Mist':
 		case 'Fog':
-		case 'Freezing Fog':
+		case 'Freezing fog':
 		case 'Haze':
 			attrArray[0] = .6
 			attrArray[1] = 0
