@@ -26,7 +26,6 @@ $(document).ready(function () {
 	let timing = 0
 	let inputName = "New Playlist"
 	let weatherResult = null
-	let bearer = "Bearer BQBsilITxczaWTw9Af7YjHbB4FzFhnyWq6a2v5jGDDFzxcEY5eY7mQWDnu0MsZ_Nt716jNwOBGCFHTiNd-RJv8WgMdunxEC5dsSD8XDqBmv8D1SvYMkrwiOUOrEXsrtue1Z24G1NYwnVkXEHevUeBHeVlacDDSTZzYucyD0JN3hPqGNvoqqi8YPk9yBvN8T5TwOp7NkmRz4YeF3rLdea2Qb_SrtHin8Da95h1-ci4BrJAXq8Vjh9vtc"
 
 	load()
 
@@ -36,17 +35,11 @@ $(document).ready(function () {
 		let bearerURL = window.location.href
 		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
-<<<<<<< HEAD
-		// let bearer = "Bearer" + bearerURLThree
-		window.close()
-=======
 		bearer = "Bearer " + bearerURLThree
-		setTimeout(function(){
-   			window.close(); 
-		}, 10000);
-		console.log("bearer",bearer)
->>>>>>> 423f73931a11c49bdb42702e6733b62c1e53f8a9
+		window.localStorage.setItem('array',bearer)
+		window.close();
 	})
+
 
 	function load() {
 		let boxy = localStorage.getItem('playlist')
@@ -59,12 +52,19 @@ $(document).ready(function () {
 
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
-
+		window.open(spotifyUrl)
 	})
 
 	$(".apply").on("click", function (e) {
 		e.preventDefault()
-		console.log(bearer)
+		if (window.localStorage.getItem('array') != null){
+			let bearer = window.localStorage.getItem('array')
+			window.localStorage.removeItem('array')
+			console.log(bearer)
+		}
+		else {
+			confirm('Please authenticate before trying to proceed')
+		}
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
 		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
