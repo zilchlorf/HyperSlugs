@@ -70,10 +70,9 @@ $(document).ready(function () {
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
 		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
-			weatherResult = JSON.parse(window.localStorage.getItem('weather'))
-			if (weatherResult !== null) {
-				weatherGeneratorCall(weatherResult)
-				console.log(weatherResult,attrArray)
+			hello = JSON.parse(window.localStorage.getItem('weather'))
+			if (hello !== null) {
+				weatherGeneratorCall(hello)
 				danceMax = attrArray[0]
 				danceMin = attrArray[1]
 				accMax = attrArray[2]
@@ -85,6 +84,7 @@ $(document).ready(function () {
 				valMax = attrArray[8]
 				valMin = attrArray[9]
 				getLikedSongs(limit, offset)
+				// console.log(attrArray)
 			} else {
 				confirm('Please enter an accurate zip code or city name and try again')
 				return
