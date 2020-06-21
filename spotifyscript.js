@@ -26,21 +26,20 @@ $(document).ready(function () {
 	let timing = 0
 	let inputName = "New Playlist"
 	let weatherResult = null
-	let bearer = "Bearer"
+	let bearer = "Bearer BQBsilITxczaWTw9Af7YjHbB4FzFhnyWq6a2v5jGDDFzxcEY5eY7mQWDnu0MsZ_Nt716jNwOBGCFHTiNd-RJv8WgMdunxEC5dsSD8XDqBmv8D1SvYMkrwiOUOrEXsrtue1Z24G1NYwnVkXEHevUeBHeVlacDDSTZzYucyD0JN3hPqGNvoqqi8YPk9yBvN8T5TwOp7NkmRz4YeF3rLdea2Qb_SrtHin8Da95h1-ci4BrJAXq8Vjh9vtc"
 
 	load()
 
 
-	$('.take').on('click', function(e) {
+	$('.take').on('click', function (e) {
 		e.preventDefault()
 		console.log(window.location.href)
 		let bearerURL = window.location.href
 		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
-		let bearer = "Bearer" + bearerURLThree
+		// let bearer = "Bearer" + bearerURLThree
 		window.close()
 	})
-
 
 	function load() {
 		let boxy = localStorage.getItem('playlist')
@@ -53,8 +52,8 @@ $(document).ready(function () {
 
 	$('.auth').on('click', function (e) {
 		e.preventDefault()
-		window.open(spotifyUrl)
-})
+
+	})
 
 	$(".apply").on("click", function (e) {
 		console.log(bearer)
@@ -62,6 +61,7 @@ $(document).ready(function () {
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
 		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
+			weatherResult = JSON.parse(window.localStorage.getItem('weather'))
 			if (weatherResult !== null) {
 				weatherGeneratorCall(weatherResult)
 				danceMax = attrArray[0]

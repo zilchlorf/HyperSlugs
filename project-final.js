@@ -24,6 +24,7 @@ function searchWeather(searchTerm) {
 
 function init(resultFromServer) {
 	weatherResult = resultFromServer.data[0]
+	window.localStorage.setItem('weather',JSON.stringify(weatherResult))
 	return weatherResult
 }
 
