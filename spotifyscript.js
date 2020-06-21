@@ -1,7 +1,6 @@
 let clientID = "9f547ffe813f412baf1c09310914078f";
 const redirectURI = "https://weerklank.github.io/HyperSlugs/auth.html";
 var spotifyUrl = ("https://accounts.spotify.com/authorize?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&response_type=token&scope=user-library-read%20user-read-playback-state%20streaming%20user-modify-playback-state%20playlist-modify-public%20playlist-modify-private%20user-read-currently-playing%20playlist-read-private%20user-follow-read")
-console.log(spotifyUrl)
 
 $(document).ready(function () {
 
@@ -60,10 +59,13 @@ $(document).ready(function () {
 		if (window.localStorage.getItem('array') != null){
 			bearer = window.localStorage.getItem('array')
 			window.localStorage.removeItem('array')
-			console.log(bearer)
 		}
 		else {
-			confirm('Please authenticate before trying to proceed')
+			if (bearer != null) {
+			}
+			else {
+				confirm('Please authenticate before trying to proceed')
+			}
 		}
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
@@ -425,7 +427,6 @@ $(document).ready(function () {
 
 			$.ajax(settings).done(function (response) {
 				$(".iframe").attr("src", box)
-				console.log($('.iframe'))
 			}).fail(function (response) {
 				$(".iframe").attr("src", box)
 				console.log('something seems to have gone wrong', response, settings)
