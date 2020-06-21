@@ -19,18 +19,19 @@ function searchWeather(searchTerm) {
         console.log('result from api is: ', result);
         init(result);
 		console.log(hello)
+		// weatherGeneratorCall(result);
+		// console.log('test')
     })
 }
 
 function init(resultFromServer) {
-	weatherResult = resultFromServer.data[0]
-	window.localStorage.setItem('weather',JSON.stringify(weatherResult))
-	return weatherResult
+	hello = resultFromServer
+	window.localStorage.setItem('weather',JSON.stringify(hello))
+	return hello
 }
 
 function weatherGeneratorCall(resultFromServer) {
-	console.log(resultFromServer)
-	switch (resultFromServer.weather.description) {
+	switch (resultFromServer.data[0].weather.description) {
 		case 'Clear sky':
 		case 'Smoke':
 		case 'Sand/Dust':
@@ -129,17 +130,17 @@ function weatherGeneratorCall(resultFromServer) {
 			console.log("In the function "+ attrArray)
 			break;
 		default:
-			attrArray[0] = 1
-			attrArray[1] = 0
-			attrArray[2] = 1
-			attrArray[3] = 0
-			attrArray[4] = 1
-			attrArray[5] = 0
-			attrArray[6] = 1
-			attrArray[7] = 0
-			attrArray[8] = 1
-			attrArray[9] = 0
-			console.log('dam')
+			// attrArray[0] = 1
+			// attrArray[1] = 0
+			// attrArray[2] = 1
+			// attrArray[3] = 0
+			// attrArray[4] = 1
+			// attrArray[5] = 0
+			// attrArray[6] = 1
+			// attrArray[7] = 0
+			// attrArray[8] = 1
+			// attrArray[9] = 0
+			// console.log('dam')
 			break;
 	}
 	console.log(attrArray)
