@@ -33,12 +33,19 @@ $(document).ready(function () {
 
 	$('.take').on('click', function (e) {
 		e.preventDefault()
-		console.log(window.location.href)
 		let bearerURL = window.location.href
 		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
+<<<<<<< HEAD
 		// let bearer = "Bearer" + bearerURLThree
 		window.close()
+=======
+		bearer = "Bearer " + bearerURLThree
+		setTimeout(function(){
+   			window.close(); 
+		}, 10000);
+		console.log("bearer",bearer)
+>>>>>>> 423f73931a11c49bdb42702e6733b62c1e53f8a9
 	})
 
 	function load() {
@@ -56,8 +63,8 @@ $(document).ready(function () {
 	})
 
 	$(".apply").on("click", function (e) {
-		console.log(bearer)
 		e.preventDefault()
+		console.log(bearer)
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
 		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
