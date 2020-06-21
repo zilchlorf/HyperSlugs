@@ -36,16 +36,11 @@ $(document).ready(function () {
 		let bearerURL = window.location.href
 		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
-<<<<<<< HEAD
-		// let bearer = "Bearer" + bearerURLThree
-		window.close()
-=======
 		bearer = "Bearer " + bearerURLThree
 		setTimeout(function(){
    			window.close(); 
 		}, 10000);
 		console.log("bearer",bearer)
->>>>>>> 423f73931a11c49bdb42702e6733b62c1e53f8a9
 	})
 
 	function load() {
