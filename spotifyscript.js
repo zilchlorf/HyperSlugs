@@ -33,16 +33,14 @@ $(document).ready(function () {
 
 	$('.take').on('click', function(e) {
 		e.preventDefault()
-		console.log(window.location.href)
 		let bearerURL = window.location.href
 		let bearerURLTwo = bearerURL.replace('https://weerklank.github.io/HyperSlugs/auth.html#access_token=', '')
 		let bearerURLThree = bearerURLTwo.replace('&token_type=Bearer&expires_in=3600', '')
 		bearer = "Bearer " + bearerURLThree
-		console.log(bearerURL,bearerURLTwo,bearerURLThree)
 		setTimeout(function(){
    			window.close(); 
 		}, 10000);
-		return bearer
+		console.log("bearer",bearer)
 	})
 
 
@@ -61,11 +59,12 @@ $(document).ready(function () {
 })
 
 	$(".apply").on("click", function (e) {
-		console.log(bearer)
 		e.preventDefault()
+		console.log(bearer)
 		if (document.getElementById('playlistGenreInput').value === 'Option 2') {
 			minMax()
 		} else if (document.getElementById('playlistGenreInput').value === 'Option 1') {
+			weatherResult = JSON.parse(window.localStorage.getItem('weather'))
 			if (weatherResult !== null) {
 				weatherGeneratorCall(weatherResult)
 				danceMax = attrArray[0]
