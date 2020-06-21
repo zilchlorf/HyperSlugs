@@ -129,6 +129,16 @@ function weatherGeneratorCall(resultFromServer) {
 			console.log("In the function "+ attrArray)
 			break;
 		default:
+			attrArray[0] = 1
+			attrArray[1] = 0
+			attrArray[2] = 1
+			attrArray[3] = 0
+			attrArray[4] = 1
+			attrArray[5] = 0
+			attrArray[6] = 1
+			attrArray[7] = 0
+			attrArray[8] = 1
+			attrArray[9] = 0
 			console.log('dam')
 			break;
 	}

@@ -73,6 +73,7 @@ $(document).ready(function () {
 			weatherResult = JSON.parse(window.localStorage.getItem('weather'))
 			if (weatherResult !== null) {
 				weatherGeneratorCall(weatherResult)
+				console.log(weatherResult,attrArray)
 				danceMax = attrArray[0]
 				danceMin = attrArray[1]
 				accMax = attrArray[2]
@@ -272,7 +273,6 @@ $(document).ready(function () {
 					"Authorization": bearer
 				}
 			}
-
 			$.ajax(settings).done(function (response) {
 				for (let c = 0; c < response.audio_features.length; c++) {
 					if (response.audio_features[c].danceability < danceMax &&
@@ -293,11 +293,12 @@ $(document).ready(function () {
 					if (songsFit.length < 20) {
 						let amount = (20 - songsFit.length)
 						getExtraSongs(amount, songsFit)
-						songsFitURI(songsFit)
 					} else {
 						songsFitURI(songsFit)
 					}
 				}
+			}).fail( function (response) {
+				console.log('something seems to have gone wrong', response, settings)
 			})
 		}
 	}
@@ -315,8 +316,7 @@ $(document).ready(function () {
 				"Authorization": bearer
 			},
 			data: {
-				// seed_tracks: songsFit[0].id,
-				seed_tracks: '7egj375ez0KtF3bYCfAHdZ',
+				seed_tracks: songsFit[0].id,
 				max_acousticness: accMax,
 				min_acousticness: accMin,
 				max_danceability: danceMax,
@@ -334,6 +334,7 @@ $(document).ready(function () {
 		$.ajax(settings).done(function (response) {
 			for (let c = 0; c < response.tracks.length; c++) {
 				songsFit.push(response.tracks[c])
+				songsFitURI(songsFit)
 			}
 			songsFitURI(songsFit)
 		}).fail(function (response) {
@@ -374,6 +375,8 @@ $(document).ready(function () {
 		$.ajax(settings).done(function (response) {
 			let userId = response.id
 			makeNewPlaylist(userId, songsFitURIsArray)
+		}).fail(function (response) {
+			console.log('something seems to have gone wrong', response, settings)
 		})
 	};
 
@@ -398,7 +401,6 @@ $(document).ready(function () {
 			json: true
 		}
 
-
 		$.ajax(settings).done(function (response) {
 			var playlistId = response.id
 			addToPlaylist(playlistId, songsFitURIsArray)
@@ -408,7 +410,6 @@ $(document).ready(function () {
 	};
 
 	function addToPlaylist(playlistId, songsFitURIsArray) {
-
 		for (var c = 0; c < songsFitURIsArray.length; c++) {
 
 			var box = ('https://open.spotify.com/embed/playlist/' + playlistId)
